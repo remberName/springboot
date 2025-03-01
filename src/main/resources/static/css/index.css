@@ -1,0 +1,12 @@
+.showButton{
+  display: none;
+}
+.alert-box {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+}
