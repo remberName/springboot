@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>演習課題</title>
+<style type="text/css">
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+}
+
+header {
+	background-color: #333;
+	color: withe;
+	padding: 20px 0;
+	text-align: center;
+}
+
+nav {
+	background-color: #444;
+	overflow: hidden;
+}
+
+nav a {
+	color: white;
+	padding: 14px 20px;
+	text-decoration: none;
+	float: left;
+}
+
+nav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+main {
+	padding: 20px;
+}
+
+.progile-info {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-bottom: 40px;
+}
+
+.profile-info img {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+
+footer {
+	text-align: center;
+	padding: 10px 0;
+	color: white;
+	margin-top: 40px;
+}
+
+canvas {
+	boder: 1px solid black;
+}
+</style>
+
+</head>
+<body>
+	<header>
+		<h1>プロフィールページ</h1>
+	</header>
+
+	<!-- ナビゲーション -->
+	<nav>
+		<a href="#about">自己紹介</a> <a href="#skills">スキル</a> <a href="#contact">連絡先</a>
+	</nav>
+
+	<!-- メインコンテンツ -->
+	<main>
+		<!-- 自己紹介セクション -->
+		<section id="about">
+			<h2>自己紹介</h2>
+			<div class="profile-info">
+				<img
+					src="https://www.pandaancha.mx/plds/articulos/froala/bing-image-creator-crea-imagenes-ia-bing-microsoft-edge-1-1200x1200-228971832.png"
+					alt="プロフィール写真">
+				<div>
+					<h3>名前 不明</h3>
+					<p>地球の放浪者・フリーランス</p>
+					<p>こんにちは、私は地球らかの放浪者です。美味しい食べ物と綺麗な景色を探している。世界の酸素の消耗と二酸化炭素の製造を重大の貢献をしてる。一番好きなことは空想です。</p>
+					</div>
+
+				<!-- スキルセクション -->
+				<section id="skills">
+					<h2>スキル</h2>
+					<ul>
+						<li>寝れる</li>
+						<li>食べれる</li>
+						<li>遊べる</li>
+						<li>お金使える</li>
+					</ul>
+				</section>
+
+				<section id="contact">
+					<h2>連絡先</h2>
+					<p>HR367惑星ー座標120：110ー地下三千メトロ</p>
+				</section>
+
+				<footer>
+					<p>&copy; 3082 名前 不明</p>
+				</footer>
+			</div>
+		</section>
+	</main>
+
+	<!-- canvasで図形を描く -->
+	<canvas id="myCanvas" width="500" height="500"></canvas>
+	<script>
+		// Canvas要素を取得
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext("2d");
+
+		// 長方形の描画
+		ctx.fillStyle = "blue";//色を指定
+		ctx.fillRect(50, 20, 200, 100);//x,y,幅,高さ
+
+		// 円の描画
+		ctx.beginPath();
+		ctx.arc(300, 150, 50, 0, Math.PI * 2);//x,y,半径,開始角度,終了角度
+		ctx.fillStyle = "green";//色を指定
+		ctx.fill();
+
+		// 直線の描画
+		ctx.beginPath();
+		ctx.moveTo(50, 200);// 開始位置
+		ctx.lineTo(450, 200);// 終了位置
+		ctx.strokeStyle = "red";// 線の色
+		ctx.lineWidth = 5;// 線の太さ
+		ctx.stroke();
+	</script>
+</body>
+</html>
