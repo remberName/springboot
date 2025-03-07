@@ -2,7 +2,6 @@ package com.es.edu.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * [概要] <p>ユーザー情報入力クラス。</p>
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
  * [補充] <p>特になし。</p>
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserInfoInputDto {
 
