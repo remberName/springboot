@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * [概要] <p>ユーザーエンティティクラス。</p>
@@ -12,7 +11,6 @@ import lombok.NoArgsConstructor;
  * [補充] <p>特になし。</p>
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @JsonSerialize
 public class UserEntity {
@@ -78,7 +76,7 @@ public class UserEntity {
 	}
 
 	public UserEntity() {
-		super();
+	
 	}
 	
 }

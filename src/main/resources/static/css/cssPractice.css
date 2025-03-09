@@ -1,0 +1,98 @@
+/* アニメーションの定義: div4を左右に移動させる */
+@keyframes slide {
+  from {
+    transform: translateX(0); /* 初期位置（0px） */
+  }
+  to {
+    transform: translateX(500px); /* 500px 右に移動 */
+  }
+}
+
+/* @keyframes アニメーションを使用して無限回転を設定 */
+@keyframes rotetaAnimation {
+	0%{
+    	transform: rotate(0deg); /* 初期回転角度 */
+    }
+    100%{
+    	transform: rotate(360deg); /* 360度回転 */
+    }
+}
+
+/* @keyframes アニメーションを使用して無限回転を設定 */
+@keyframes rotetaAnimation2 {
+	100%{
+    	transform: rotate(0deg); /* 初期回転角度 */
+    }
+    0%{
+    	transform: rotate(360deg); /* 360度回転 */
+    }
+}
+
+
+/* カスタムプロパティ（CSS変数）の定義 */
+:root {
+	--width: 100px;  /* 幅を100pxに設定 */
+	--height: 100px; /* 高さを100pxに設定 */
+}
+
+/* コンテナのスタイル: フレックスボックスを使用してアイテムを並べる */
+.container {
+	display: flex;               /* フレックスボックスを使用 */
+	justify-content: space-between; /* アイテムを左右に均等に配置 */
+	align-items: center;          /* アイテムを縦方向に中央揃え */
+}
+
+/* smailDiv1のスタイル */
+.smailDiv1 {
+	background: linear-gradient(to right, red, yellow); /* 赤から黄色のグラデーション */
+	width: var(--width);  /* 幅をカスタムプロパティで指定 */
+	height: var(--height); /* 高さをカスタムプロパティで指定 */
+    animation: rotetaAnimation2 3s linear infinite;/* 3秒で1回転し、無限に繰り返す */
+	box-shadow: 
+        5px 5px 5px rgba(0, 0, 255, 0.3),   /* 青色の影 */
+        10px 10px 10px rgba(255, 0, 0, 0.3);  /* 赤色の影 */
+}
+
+/* smailDiv2のスタイル */
+.smailDiv2 {
+	background: linear-gradient(to right, yellow, green); /* 黄色から緑色のグラデーション */
+	width: var(--width); /* 幅をカスタムプロパティで指定 */
+	height: var(--height); /* 高さをカスタムプロパティで指定 */
+    animation: rotetaAnimation 3s linear infinite;/* 3秒で1回転し、無限に繰り返す */
+	box-shadow: 
+        5px 5px 5px rgba(0, 0, 255, 0.3),   /* 青色の影 */
+        10px 10px 10px rgba(255, 0, 0, 0.3);  /* 赤色の影 */
+}
+
+/* smailDiv3のスタイル */
+.smailDiv3 {
+	background: linear-gradient(to right, green, blue); /* 緑色から青色のグラデーション */
+	width: var(--width); /* 幅をカスタムプロパティで指定 */
+	height: var(--height); /* 高さをカスタムプロパティで指定 */
+ 
+	box-shadow: 
+        5px 5px 5px rgba(0, 0, 255, 0.3),   /* 青色の影 */
+        10px 10px 10px rgba(255, 0, 0, 0.3);  /* 赤色の影 */
+    transform: translateX(-50%) rotate(45deg); /* 横方向で中央に配置し、45度回転 */
+    transition: transform 0.3s ease; /* transformの変化をスムーズに */
+}
+
+/* smailDiv4のスタイル (アニメーション付き) */
+.smailDiv4 {
+	animation: slide 2s ease-in-out infinite; /* slideアニメーションを適用（2秒で繰り返し） */
+	position: absolute;  /* 親要素に対して絶対位置に設定 */
+	top: 0; /* 上から0pxの位置に配置 */
+	width: 100px; /* 幅100px */
+	height: 100px; /* 高さ100px */
+	background: linear-gradient(to right, blue, red); /* 青から赤のグラデーション */
+    box-shadow: 
+        5px 5px 5px rgba(0, 0, 255, 0.3),   /* 青色の影 */
+        10px 10px 10px rgba(255, 0, 0, 0.3);  /* 赤色の影 */
+}
+
+/* 大きなdivのスタイル */
+.bigDiv {
+	width: 600px;  /* 幅600px */
+	height: 600px; /* 高さ600px */
+	position: relative; /* 子要素の絶対位置を基準にするためrelativeを設定 */
+}
