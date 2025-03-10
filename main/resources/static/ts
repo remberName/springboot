@@ -1,0 +1,21 @@
+"use strict";
+fetch('/api/users') // 請求したいcontrollerクラスのurl
+    .then(response => response.json()) // 戻ったデータを解析
+    .then(userList => {
+    // ここで戻ったデータをJSPに渡す
+    console.log("data");
+    displayData(userList);
+}).catch(error => console.error('Error fatching data:', error)); // 異常処理
+// jspでデータを展示する。EL式forEachでいいですか、ここは練習のため、HTMLここで作成
+function displayData(userList) {
+    // idによってDomを取得
+    const userListElement = document.getElementById("data");
+    // dom取れるなら、データを展示
+    if (userListElement) {
+        userList.forEach(user => {
+            const showItem = document.createElement("tr");
+            showItem.textContent = `<td>${user.userName}</td><td>${user.userSex}</td><td>${user.address}</td>`;
+            userListElement.appendChild(showItem);
+        });
+    }
+}
