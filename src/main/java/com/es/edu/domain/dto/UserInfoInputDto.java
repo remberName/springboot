@@ -38,7 +38,7 @@ public class UserInfoInputDto {
 			this.userSex = 0;
 	}
 
-	public UserInfoInputDto(int userId, String userName, String userSex, String address) {
+	public UserInfoInputDto(Integer userId, String userName, String userSex, String address) {
 		this.userId = userId;
 		this.userName = userName;
 		if(userSex.equals("男"))
@@ -48,6 +48,4 @@ public class UserInfoInputDto {
 		this.address = address;
 	}
 
-	public UserInfoInputDto() {
-	}
 }

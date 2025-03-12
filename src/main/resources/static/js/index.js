@@ -16,7 +16,7 @@ var app = new Vue({
 		fetchUserData() {
 			axios.get('http://localhost:8080/api/users')  // Spring BootのAPIエンドポイントにGETリクエスト
 				.then(response => {
-					this.userList = response.data;
+					this.userList = response.data.userInfoOutputList;
 					this.userList = this.userList.map(user => {
 						return {
 							...user, // 既存のユーザー情報をそのままコピー
@@ -56,7 +56,7 @@ var app = new Vue({
 				axios.put(`http://localhost:8080/api/users/addUser`, user)
 					.then(response => {
 						this.fetchUserData();
-						this.showAlert("保存しました");
+						this.showAlert(response.data.message);
 					})
 					.catch(error => {
 						console.error("保存エラー:", error);
@@ -67,7 +67,7 @@ var app = new Vue({
 				axios.put(`http://localhost:8080/api/users/updateUser`, user)
 					.then(response => {
 						this.fetchUserData();
-						this.showAlert("保存しました");
+						this.showAlert(response.data.message);
 					})
 					.catch(error => {
 						console.error("保存エラー:", error);
@@ -91,7 +91,7 @@ var app = new Vue({
 			axios.delete(`http://localhost:8080/api/users/${userId}`)
 				.then(response => {
 					this.fetchUserData();
-					this.showAlert("削除しました");
+					this.showAlert(response.data.message);
 				})
 				.catch(error => {
 					console.error("削除エラー:", error);
