@@ -8,7 +8,7 @@ import com.es.edu.domain.dto.UserInfoOutputDto;
 import lombok.Data;
 
 /**
- * [概要] <p>ユーザーフォームクラス。</p>
+ * [概要] <p>ユーザー出力フォームクラス。</p>
  * [説明] <p>ユーザーフォームクラス。</p>
  * [補充] <p>特になし。</p>
  */
