@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public List<UserInfoOutputDto> selectAll() {
-
 		List<UserEntity> userEntities = userRepository.selectAll();
 		List<UserInfoOutputDto> userInfoOutputDtos = new ArrayList<>();
 		userEntities.forEach(userEntity -> {
@@ -94,7 +93,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public int deleteUserEntity(Integer userEntityId) {
-		
 		return userRepository.deleteUserEntity(userEntityId);
 	}
 	

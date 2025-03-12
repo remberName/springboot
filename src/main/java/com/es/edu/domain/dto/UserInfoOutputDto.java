@@ -46,7 +46,4 @@ public class UserInfoOutputDto {
 			this.userSex = "女";
 		this.address = address;
 	}
-
-	public UserInfoOutputDto() {
-	}
 }

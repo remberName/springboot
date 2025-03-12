@@ -30,7 +30,6 @@ public class UserInfoInputDto {
 	 */
 	private String address;
 
-
 	public void setUserSex(String userSex) {
 		if(userSex.equals("男"))
 			this.userSex = 1;
