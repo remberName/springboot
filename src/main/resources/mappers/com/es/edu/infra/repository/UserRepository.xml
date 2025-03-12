@@ -9,7 +9,7 @@
 	
 	<!-- IDによってユーザー情報を取得 -->
 	<select id="selectUserEntityById" parameterType="Integer" resultType="com.es.edu.infra.entity.UserEntity">
-		select * from users where id = #{id}
+		select * from users where userid = #{id}
 	</select>
 	
 	<!-- ユーザー追加 -->

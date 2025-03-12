@@ -2,7 +2,6 @@ package com.es.edu.application;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,25 +16,18 @@ import com.es.edu.domain.dto.UserInfoInputDto;
 import com.es.edu.domain.dto.UserInfoOutputDto;
 import com.es.edu.domain.service.UserService;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * ユーザー情報操作コントローラクラス。
  */
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-    
-    @RequestMapping("favicon.ico")
-    public void returnNoFavicon() {
-        // 何もしない
-    }
 
     /**
      * ユーザー情報を全て取得。
