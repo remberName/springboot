@@ -1,8 +1,6 @@
 package com.es.edu.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * [概要] <p>ユーザー情報入力クラス。</p>
@@ -10,8 +8,6 @@ import lombok.NoArgsConstructor;
  * [補充] <p>特になし。</p>
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserInfoInputDto {
 
 	/**
@@ -34,26 +30,6 @@ public class UserInfoInputDto {
 	 */
 	private String address;
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public int getUserSex() {
-		return userSex;
-	}
-
 	public void setUserSex(String userSex) {
 		if(userSex.equals("男"))
 			this.userSex = 1;
@@ -61,16 +37,7 @@ public class UserInfoInputDto {
 			this.userSex = 0;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public UserInfoInputDto(int userId, String userName, String userSex, String address) {
-		super();
+	public UserInfoInputDto(Integer userId, String userName, String userSex, String address) {
 		this.userId = userId;
 		this.userName = userName;
 		if(userSex.equals("男"))
@@ -80,7 +47,4 @@ public class UserInfoInputDto {
 		this.address = address;
 	}
 
-	public UserInfoInputDto() {
-		super();
-	}
 }

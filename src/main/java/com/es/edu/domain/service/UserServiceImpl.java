@@ -3,7 +3,6 @@ package com.es.edu.domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.es.edu.domain.dto.UserInfoInputDto;
@@ -11,21 +10,19 @@ import com.es.edu.domain.dto.UserInfoOutputDto;
 import com.es.edu.infra.entity.UserEntity;
 import com.es.edu.infra.repository.UserRepository;
 
+import lombok.AllArgsConstructor;
+
 /**
  * [概要] <p>ユーザーサービスクラス。</p>
  * [説明] <p>ユーザー操作を行うサービスクラス。。</p>
  * [補充] <p>特になし。</p>
  */
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService{
 	
 	private final UserRepository userRepository;
 	
-	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-
 	/**
 	 * [概要] <p>ユーザー情報を取得。</p>
 	 * [説明] <p>すべてのユーザー情報を取得。</p>
@@ -35,7 +32,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public List<UserInfoOutputDto> selectAll() {
-
 		List<UserEntity> userEntities = userRepository.selectAll();
 		List<UserInfoOutputDto> userInfoOutputDtos = new ArrayList<>();
 		userEntities.forEach(userEntity -> {
@@ -97,7 +93,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public int deleteUserEntity(Integer userEntityId) {
-		
 		return userRepository.deleteUserEntity(userEntityId);
 	}
 	

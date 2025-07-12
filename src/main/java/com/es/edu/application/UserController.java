@@ -1,8 +1,8 @@
 package com.es.edu.application;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,99 +13,140 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.es.edu.application.from.UserInputFrom;
+import com.es.edu.application.from.UserOutputForm;
 import com.es.edu.domain.dto.UserInfoInputDto;
 import com.es.edu.domain.dto.UserInfoOutputDto;
 import com.es.edu.domain.service.UserService;
 
+import lombok.RequiredArgsConstructor;
+
 /**
- * ユーザー情報操作コントローラクラス。
+ * [概要] <p>ユーザー情報操作コントローラクラス。</p>
+ * [説明] <p>ユーザー情報操作コントローラクラス。</p>
+ * [補充] <p>特になし。</p>
  */
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-    
-    @RequestMapping("favicon.ico")
-    public void returnNoFavicon() {
-        // 何もしない
-    }
-
     /**
-     * ユーザー情報を全て取得。
-     * @return ユーザー情報リスト
+     * [概要] <p>ユーザー情報を全て取得。</p>
+     * [説明] <p>ユーザー情報を全て取得。</p>
+     * [補充] <p>特になし。</p>
+     *
+     * @return ユーザーフォーム
      */
     @GetMapping
-    public List<UserInfoOutputDto> getAllUsers() {
+    public UserOutputForm getAllUsers() {
+    	
     	List<UserInfoOutputDto> userInfoOutputDtos = userService.selectAll();
-        return userInfoOutputDtos;
+    	UserOutputForm userForm = new UserOutputForm();
+    	userForm.setUserInfoOutputList(userInfoOutputDtos);
+        return userForm;
     }
 
     /**
-     * ユーザー情報を取得（ユーザーIDによる検索）。
-     * @param userEntityId ユーザーID
+     * [概要] <p>ユーザー情報を取得（ユーザーIDによる検索）。</p>
+     * [説明] <p>。</p>
+     * [補充] <p>特になし。</p>
+     *
+     * @param userId ユーザーID
      * @return ユーザー情報
      */
-    @GetMapping("/{userEntityId}")
-    public ResponseEntity<UserInfoOutputDto> getUserById(@PathVariable Integer userEntityId) {
-        UserInfoOutputDto userInfoOutputDto = userService.selectUserEntityById(userEntityId);
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserOutputForm> getUserById(@PathVariable Integer userId) {
+    	
+    	UserInfoOutputDto userInfoOutputDto = userService.selectUserEntityById(userId);
+        UserOutputForm userForm = new UserOutputForm();
+        List<UserInfoOutputDto> userInfoOutputDtos = new ArrayList<>();
+        userInfoOutputDtos.add(userInfoOutputDto);
+        userForm.setUserInfoOutputList(userInfoOutputDtos);
         if (userInfoOutputDto != null) {
-            return ResponseEntity.ok(userInfoOutputDto);
+            return ResponseEntity.ok(userForm);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     /**
-     * ユーザー情報を更新（ユーザーIDによる更新）または追加。
-     * @param userInfoInputDto ユーザー情報
-     * @return 更新結果メッセージ
+     * [概要] <p>ユーザー情報を追加。</p>
+     * [説明] <p>ユーザー情報を追加。</p>
+     * [補充] <p>特になし。</p>
+     *
+     * @param userInputFrom ユーザー情報
+     * @return　ユーザーフォーム
      */
     @PutMapping("/addUser")
-    public ResponseEntity<String> addUser(@RequestBody UserInfoInputDto userInfoInputDto) {
+    public UserOutputForm addUser(@RequestBody UserInputFrom userInputFrom) {
+    	
+    	UserInfoInputDto userInfoInputDto = new UserInfoInputDto(userInputFrom.getUserId(), userInputFrom.getUserName(), userInputFrom.getUserSex(), userInputFrom.getAddress());
         // 追加処理
-        int result = userService.insertUserEntity(userInfoInputDto);
-        if (result == 0) {
-            return ResponseEntity.status(500).body("追加失敗しました。");
+        int rows = userService.insertUserEntity(userInfoInputDto);
+        UserOutputForm userForm = new UserOutputForm();
+        userForm.setRows(rows);
+        if (rows == 0) {
+        	userForm.setStatus(500);
+        	userForm.setMessage("追加失敗しました。");
         } else {
-            return ResponseEntity.status(201).body("追加成功しました。");
+        	userForm.setStatus(201);
+        	userForm.setMessage("追加成功しました。");
         }
+        return userForm;
     }
 
     /**
-     * ユーザー情報を更新（ユーザーIDによる更新）。
-     * @param userInfoInputDto ユーザー情報
-     * @return 更新結果メッセージ
+     * [概要] <p>ユーザー情報を更新。</p>
+     * [説明] <p>ユーザー情報を更新（ユーザーIDによる更新）。</p>
+     * [補充] <p>特になし。</p>
+     *
+     * @param userInputFrom　ユーザー情報
+     * @return ユーザーフォーム
      */
     @PutMapping("/updateUser")
-    public ResponseEntity<String> updateUser(@RequestBody UserInfoInputDto userInfoInputDto) {
+    public UserOutputForm updateUser(@RequestBody UserInputFrom userInputFrom) {
+    	
+    	UserInfoInputDto userInfoInputDto = new UserInfoInputDto(userInputFrom.getUserId(), userInputFrom.getUserName(), userInputFrom.getUserSex(), userInputFrom.getAddress());
         // 更新処理
-        int result = userService.updateUserEntity(userInfoInputDto);
-        if (result == 0) {
-            return ResponseEntity.status(500).body("更新失敗しました。");
+        int rows = userService.updateUserEntity(userInfoInputDto);
+        UserOutputForm userForm = new UserOutputForm();
+        userForm.setRows(rows);
+        if (rows == 0) {
+        	userForm.setStatus(500);
+        	userForm.setMessage("更新失敗しました。");
         } else {
-            return ResponseEntity.ok("更新成功しました。");
+        	userForm.setStatus(201);
+        	userForm.setMessage("更新成功しました。");
         }
+        return userForm;
     }
 
     /**
-     * ユーザー情報を削除（ユーザーIDによる削除）。
+     * [概要] <p>ユーザー情報を削除</p>
+     * [説明] <p>ユーザー情報を削除（ユーザーIDによる削除）。</p>
+     * [補充] <p>特になし。</p>
+     *
      * @param userEntityId ユーザーID
-     * @return 削除結果メッセージ
+     * @return ユーザーフォーム
      */
     @DeleteMapping("/{userEntityId}")
-    public ResponseEntity<String> deleteUser(@PathVariable Integer userEntityId) {
-        int result = userService.deleteUserEntity(userEntityId);
-        if (result == 0) {
-            return ResponseEntity.status(500).body("削除失敗しました。");
+    public UserOutputForm deleteUser(@PathVariable Integer userEntityId) {
+    	
+    	// 削除処理
+        int rows = userService.deleteUserEntity(userEntityId);
+        UserOutputForm userForm = new UserOutputForm();
+        userForm.setRows(rows);
+        if (rows == 0) {
+        	userForm.setStatus(500);
+        	userForm.setMessage("削除失敗しました。"); 
         } else {
-            return ResponseEntity.ok("削除成功しました。");
+        	userForm.setStatus(201);
+        	userForm.setMessage("削除成功しました。");
         }
+        return userForm;
     }
 }
